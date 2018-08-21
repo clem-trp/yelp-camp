@@ -1,17 +1,18 @@
 {
   "name": "yelp-camp",
   "version": "1.0.0",
-  "description": "Yelp application for camps",
+  "description": "Yelp application for campgrounds",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Clement Turpain",
   "license": "ISC",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/clem-trp/yelp-camp.git"
-  }
+    "type": "git",
+    "url": "https://github.com/clem-trp/yelp-camp.git"
+  },
   "dependencies": {
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
