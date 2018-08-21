@@ -8,6 +8,10 @@
   },
   "author": "Clement Turpain",
   "license": "ISC",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/clem-trp/yelp-camp.git"
+  }
   "dependencies": {
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
