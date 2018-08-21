@@ -1,0 +1,27 @@
+.thumbnail img {
+  width: 100%;
+}
+
+.thumbnail {
+  padding: 0;
+}
+
+.thumbnail .caption-full {
+  margin: 9px;
+}
+
+.thumbnail .caption-full p {
+  text-align: justify;
+}
+
+.delete-button {
+  display: inline;
+}
+
+.form-group input {
+  margin-bottom: 1.1rem;
+}
+
+.comment-buttons {
+  display: none;
+}
