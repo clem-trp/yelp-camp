@@ -38,7 +38,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(methodOverride("_method"));
 
-seedDB();
+// seedDB();
 
 // Add elements available in every template
 app.use(function(req, res, next){
