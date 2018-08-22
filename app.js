@@ -10,8 +10,8 @@ var express               = require("express"),
     
     Campground            = require("./models/campground"),
     User 									= require("./models/user"),
-    Comment               = require("./models/comment"),
-    seedDB                = require("./seed");
+    Comment               = require("./models/comment");
+    // seedDB                = require("./seed");
   
 var commentRoutes     = require("./routes/comments"),
     campgroundRoutes  = require("./routes/campgrounds"),
