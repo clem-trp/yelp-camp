@@ -6,6 +6,7 @@ var express               = require("express"),
     LocalStrategy 				= require("passport-local"),
     methodOverride        = require("method-override"),
     flash                 = require("connect-flash"),
+    expressSanitizer      = require("express-sanitizer"),
     
     Campground            = require("./models/campground"),
     User 									= require("./models/user"),
@@ -21,6 +22,7 @@ mongoose.connect(url, { useNewUrlParser: true });
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer()); // Has to go after body parser
 app.use(express.static(__dirname + "/public"));
 app.use(flash());
 // Passport configuration

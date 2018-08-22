@@ -24,7 +24,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
       res.redirect("/campgrounds");
     } else {
       var newComment = {
-        text: req.body.commentText,
+        text: req.sanitize(req.body.commentText),
         author: {
           id: req.user._id,
           username: req.user.username
@@ -59,6 +59,7 @@ router.get("/:idComment/edit", middleware.checkCommentOwnership, function(req, r
 
 // UPDATE
 router.put("/:idComment", middleware.checkCommentOwnership, function(req, res){
+  req.body.comment.text = req.sanitize(req.body.comment.text);
   Comment.findByIdAndUpdate(req.params.idComment, req.body.comment, function(err, comment){
     if(err || !comment){
       req.flash("error", "Comment not found");

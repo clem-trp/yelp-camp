@@ -2,6 +2,7 @@ var express     = require("express");
 var router      = express.Router();
 var Campground  = require("../models/campground");
 var middleware  = require("../middleware");
+var moment      = require("moment");
 
 // INDEX
 router.get("/", function(req, res){
@@ -37,6 +38,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 // CREATE
 router.post("/", middleware.isLoggedIn, function(req, res){
   // Add new name, price, image and description from form
+  req.body.campground.description = req.sanitize(req.body.campground.description);
   var newCampground = req.body.campground; 
   // Add user info
   newCampground.author = {
@@ -61,7 +63,7 @@ router.get("/:id",function(req, res){
       req.flash("error", "Campground not found");
       res.redirect("back");
     } else {
-      res.render("campgrounds/show",{campground: campground});
+      res.render("campgrounds/show",{campground: campground, moment: moment});
     }
   });
 });
@@ -80,6 +82,7 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
 
 // UPDATE
 router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
+  req.body.campground.description = req.sanitize(req.body.campground.description);
   Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground){
     if(err || !campground){
       req.flash("error", "Campground not found");
