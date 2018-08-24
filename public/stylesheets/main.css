@@ -25,3 +25,8 @@
 .comment-buttons {
   display: none;
 }
+
+#map {
+  height: 400px;
+  width: 100%;
+}

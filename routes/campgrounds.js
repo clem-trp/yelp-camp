@@ -1,8 +1,18 @@
-var express     = require("express");
-var router      = express.Router();
-var Campground  = require("../models/campground");
-var middleware  = require("../middleware");
-var moment      = require("moment");
+var express       = require("express");
+var router        = express.Router();
+var Campground    = require("../models/campground");
+var middleware    = require("../middleware");
+var moment        = require("moment");
+var NodeGeocoder  = require("node-geocoder");
+ 
+var options = {
+  provider: "google",
+  httpAdapter: 'https',
+  apiKey: process.env.GEO_API_KEY,
+  formatter: null
+};
+ 
+var geocoder = NodeGeocoder(options);
 
 // INDEX
 router.get("/", function(req, res){
@@ -45,15 +55,25 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     id: req.user._id,
     username: req.user.username
   }
-  Campground.create(newCampground, function(err, campground){
-    if(err){
-      req.flash("error", err.message);
-      res.redirect("back");
-    } else {
-      req.flash("success", "Successfully added campground");
-      res.redirect("/campgrounds");
+  geocoder.geocode(req.body.campground.location, function (err, data) {
+    if (err || !data.length) {
+      req.flash('error', 'Invalid address');
+      return res.redirect('back');
     }
-  })
+    newCampground.lat = data[0].latitude;
+    newCampground.lng = data[0].longitude;
+    newCampground.location = data[0].formattedAddress;
+
+    Campground.create(newCampground, function(err, campground){
+      if(err){
+        req.flash("error", err.message);
+        res.redirect("back");
+      } else {
+        req.flash("success", "Successfully added campground");
+        res.redirect("/campgrounds");
+      }
+    });
+  });
 });
 
 // SHOW
