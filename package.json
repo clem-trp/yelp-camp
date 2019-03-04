@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "./set_env.sh; nodemon app.js"
   },
   "author": "Clement Turpain",
   "license": "ISC",

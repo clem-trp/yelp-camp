@@ -27,7 +27,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(flash());
 // Passport configuration
 app.use(require("express-session")({
-	secret: "My name is Clement Turpain and I like west coast swing",
+	secret: process.env.PASSPORTSECRET,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -52,7 +52,7 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/", indexRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(8000, function(){
   console.log("YelpCamp server has started");
 });
 
