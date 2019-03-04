@@ -83,7 +83,7 @@ router.get("/:id",function(req, res){
       req.flash("error", "Campground not found");
       res.redirect("back");
     } else {
-      res.render("campgrounds/show",{campground: campground, moment: moment});
+      res.render("campgrounds/show",{campground: campground, moment: moment, apiKey: process.env.GEO_API_KEY });
     }
   });
 });
